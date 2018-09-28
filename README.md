@@ -1,4 +1,28 @@
 # graphframes
+## Applecart Specifics
+### To install if your library is using `graphframes`:
+
+- pip: `pip install git+https://REDACTED:REDACTED@github.com/applecart/graphframes@release#egg=graphframes&subdirectory=python`
+- Pipfile `packages` entry: 
+```
+graphframes = {ref = "development", subdirectory = "python", git = "https://REDACTED:REDACTED@github.com/applecart/graphframes.git"}
+```
+
+### Usage in `SparkSession` creation (for tests or jobs):
+```python
+# list of all versions commented below
+# graphframes_package_v6 = 'graphframes:graphframes:0.6.0-spark2.3-s_2.11'
+
+graphframes_package = 'graphframes:graphframes:0.6.0-spark2.3-s_2.11'
+spark_session = (
+    SparkSession.builder
+    ...
+    .config('spark.jars.packages', graphframes_package)
+    ...
+    .getOrCreate()
+)
+```
+
 [![Build Status](https://travis-ci.org/graphframes/graphframes.svg?branch=master)](https://travis-ci.org/graphframes/graphframes)
 [![codecov.io](http://codecov.io/github/graphframes/graphframes/coverage.svg?branch=master)](http://codecov.io/github/graphframes/graphframes?branch=master)
 
